@@ -19,6 +19,7 @@ import androidx.lifecycle.OnLifecycleEvent
 import com.parassidhu.tickingtimer.Utils.dp2px
 import kotlinx.coroutines.*
 import kotlin.math.max
+import com.parassidhu.tickingtimer.Config as Config
 
 class TickingTimer(
     context: Context,
@@ -47,12 +48,7 @@ class TickingTimer(
       Provided a setter function for this lambda
     */
 
-    private var onTimerEndAnimation: ((View) -> Unit) = { _ ->
-        animate()
-            .alpha(0f)
-            .start()
-    }
-
+    private var onTimerEndAnimation: ((View) -> Unit) = Defaults.onTimerEndAnimation
 
     // Lambda to be executed on end of the timer
     private var onFinished: (() -> Unit)? = null
@@ -180,12 +176,24 @@ class TickingTimer(
         onTimerEndAnimation = action
     }
 
-    fun getConfig() {
+    fun defaultConfig() = Config()
 
-    }
+    fun applyConfig(config: Config) {
+        timerDuration = config.timerDuration
+        shape = config.shape
+        timerAnimation = config.timerAnimation
+        onTimerEndAnimation = config.onTimerEndAnimation
 
-    fun applyConfig() {
+        backgroundTint(config.backgroundTint)
 
+        config.customBackground?.let { bg -> customBackground(bg) }
+        config.textSize?.let { size -> textSize(size) }
+
+        textColor(config.textColor)
+
+        config.textAppearance?.let { resId -> textAppearance(resId) }
+
+        onFinished = config.onFinished
     }
 
     private fun decrementTimerText() {
