@@ -6,7 +6,6 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.Animation
-import android.view.animation.ScaleAnimation
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,6 +16,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 import com.parassidhu.tickingtimer.Utils.dp2px
+import com.parassidhu.tickingtimer.Utils.sp2px
 import kotlinx.coroutines.*
 import kotlin.math.max
 import com.parassidhu.tickingtimer.Config as Config
@@ -53,6 +53,9 @@ class TickingTimer(
     // Lambda to be executed on end of the timer
     private var onFinished: (() -> Unit)? = null
 
+    // Lambda to be executed on every elapsed second
+    private var onTick: ((Int) -> Unit)? = null
+
     // Job which runs the timer
     private var job: Job? = null
 
@@ -69,14 +72,15 @@ class TickingTimer(
         lifecycleOwner.lifecycle.addObserver(this)
     }
 
-    // Start timer with config/customization
+    // Start timer with customization
     inline fun start(func: TickingTimer.() -> Unit): TickingTimer = apply {
         func()
         start()
     }
 
-    // Start timer without any config/customization
-    fun start() {
+    // Start timer with/without any config
+    fun start(config: Config? = null) {
+        config?.let { config -> applyConfig(config) }
         tempDuration = timerDuration
         timerText.text = timerDuration.toString()
         isVisible = true
@@ -144,8 +148,8 @@ class TickingTimer(
     }
 
     // Sets the size of text in DP units
-    fun textSize(@Dp textSize: Int) {
-        timerText.textSize = dp2px(context, textSize)
+    fun textSize(@Sp textSize: Int) {
+        timerText.textSize = sp2px(context, textSize)
     }
 
     // Sets the color of the text
@@ -166,6 +170,11 @@ class TickingTimer(
         this.onFinished = action
     }
 
+    // Sets the lambda action to be executed on every elapsed second
+    fun onTick(action: (Int) -> Unit) {
+        onTick = action
+    }
+
     // Customize the animation played during the timer
     fun timerAnimation(animation: Animation) {
         timerAnimation = animation
@@ -176,33 +185,40 @@ class TickingTimer(
         onTimerEndAnimation = action
     }
 
-    fun defaultConfig() = Config()
-
+    // Applies properties to the timer from passed config object
     fun applyConfig(config: Config) {
-        timerDuration = config.timerDuration
-        shape = config.shape
-        timerAnimation = config.timerAnimation
+        timerDuration(config.timerDuration)
+        shape(config.shape)
+        timerAnimation(config.timerAnimation)
         onTimerEndAnimation = config.onTimerEndAnimation
 
         backgroundTint(config.backgroundTint)
 
         config.customBackground?.let { bg -> customBackground(bg) }
-        config.textSize?.let { size -> textSize(size) }
+        textSize(50)
 
         textColor(config.textColor)
 
         config.textAppearance?.let { resId -> textAppearance(resId) }
 
         onFinished = config.onFinished
+        onTick = config.onTick
     }
 
     private fun decrementTimerText() {
-        timerText.text = (max(timerText.text.toString().toInt() - 1, 0)).toString()
+        val time = max(timerText.text.toString().toInt() - 1, 0)
+        timerText.text = time.toString()
+        onTick?.invoke(time)
         timerDuration--
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    private fun cancel() {
+    fun cancel() {
         job?.cancel()
+    }
+
+    companion object {
+
+        fun defaultConfig() = Config()
     }
 }

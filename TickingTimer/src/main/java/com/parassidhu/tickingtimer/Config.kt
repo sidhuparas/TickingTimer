@@ -17,11 +17,13 @@ data class Config (
 
     var customBackground: Int? = Defaults.customBackground,
 
-    var textSize: Int? = Defaults.textSize,
+    var textSize: Int = Defaults.textSize,
 
     var textColor: Int = Defaults.textColor,
 
     var textAppearance: Int? = Defaults.textAppearance,
 
     var onFinished: (() -> Unit)? = Defaults.onFinished,
+
+    var onTick: ((Int) -> Unit)? = Defaults.onTick
 )

@@ -35,11 +35,13 @@ internal object Defaults {
 
     val customBackground: Int? = null
 
-    val textSize: Int? = null
+    val textSize: Int = 50
 
     val textColor: Int = android.graphics.Color.BLACK
 
     val textAppearance: Int? = null
 
     val onFinished: (() -> Unit)? = null
+
+    val onTick: ((Int) -> Unit)? = null
 }
