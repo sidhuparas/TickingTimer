@@ -94,12 +94,6 @@ class TickingTimer(
                 while (timerDuration > 0 && isActive) {
                     delay(1000)
                     decrementTimerText()
-
-                    if (timerDuration == 0)
-                        break
-
-                    delay(1000)
-                    decrementTimerText()
                 }
 
                 onTimerEndAnimation(this)

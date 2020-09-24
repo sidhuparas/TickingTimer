@@ -32,11 +32,12 @@ class MainActivity : AppCompatActivity() {
 
         timerView1.start(config)
 
-        config.shape = Shape.CIRCLE
-        config.timerAnimation = ScaleAnimation(this, null)
-        config.customBackground = R.drawable.bg_grad_orange
-
-        timerView2.start(config)
+        timerView2.start {
+            applyConfig(config)
+            shape(Shape.CIRCLE)
+            timerAnimation(ScaleAnimation(this@MainActivity, null))
+            customBackground(R.drawable.bg_grad_orange)
+        }
     }
 
     private fun startView2() {
@@ -50,10 +51,11 @@ class MainActivity : AppCompatActivity() {
 
         timerView1.start(config)
 
-        config.shape = Shape.CIRCLE
-        config.timerAnimation = ScaleAnimation(this, null)
-        config.customBackground = R.drawable.bg_grad_pink
-
-        timerView2.start(config)
+        timerView2.start {
+            applyConfig(config)
+            shape(Shape.CIRCLE)
+            timerAnimation(ScaleAnimation(this@MainActivity, null))
+            customBackground(R.drawable.bg_grad_pink)
+        }
     }
 }
