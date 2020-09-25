@@ -1,4 +1,4 @@
-# Introduction [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/sidhuparas)
+# Introduction [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/sidhuparas1234%40gmail.com)
 
 Ticking Timer is an Android library to implement a visual timer quickly, easily and effortlessly. It's developed to be Kotlin-first and you can implement the features in a very small amount of code.
 
