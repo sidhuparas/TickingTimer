@@ -1,8 +1,10 @@
-# TickingTimer
+# Introduction [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/sidhuparas)
 
 Ticking Timer is an Android library to implement a visual timer quickly, easily and effortlessly. It's developed to be Kotlin-first and you can implement the features in a very small amount of code.
 
 <img src="screenshots/poster.jpeg"/>
+
+### **Star :star:  this repo to show your support and it really does matter!** :clap:
 
 # Integration
 
@@ -17,7 +19,7 @@ allprojects {
 }
 ```
 
-In app-level `build.gradle`: [![](https://jitpack.io/v/sidhuparas/TickingTimer.svg)](https://jitpack.io/#sidhuparas/TickingTimer)
+2. In app-level `build.gradle`: [![](https://jitpack.io/v/sidhuparas/TickingTimer.svg)](https://jitpack.io/#sidhuparas/TickingTimer)
 
 ```
 dependencies {
@@ -74,13 +76,13 @@ or
 To save the properties of the timer to reuse, you can use a Config object. Create config like this:
 
 ```
-val config = TickingTimer.defaultConfig().apply {
+   val config = TickingTimer.defaultConfig().apply {
         timerDuration = 10
         textSize = 50
         textColor = Color.BLACK
         shape = Shape.ROUNDED
         customBackground = R.drawable.bg_grad_blue
-}
+   }
 ```
 
 and then apply to the timer while starting:
@@ -90,15 +92,21 @@ and then apply to the timer while starting:
 Another way to use the config is to use `applyConfig()` function:
 
 ```
-timerView.start {
+   timerView.start {
         applyConfig(config)
         shape(Shape.CIRCLE)
         timerAnimation(ScaleAnimation(this@MainActivity, null))
         customBackground(R.drawable.bg_grad_orange)
-}
+   }
 ```
 
 Remember that the properties defined after `applyConfig()` overrides the config's properties for the specific timer.
+
+## Contributions
+
+- Fork the repo
+- Create a new branch and make changes
+- Push the code to the branch and make a PR! :thumbsup:
 
 # License
 
