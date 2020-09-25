@@ -1,13 +1,31 @@
 # TickingTimer
 
-Ticking Timer is an Android library to implement a visual timer quickly, easily and effortlessly. It's developed to be Kotlin-first and you can implement the features in very small amount of code.
+Ticking Timer is an Android library to implement a visual timer quickly, easily and effortlessly. It's developed to be Kotlin-first and you can implement the features in a very small amount of code.
 
 <img src="screenshots/poster.jpeg"/>
 
 # Integration
 
-Add the gradle dependency using following:
-`TODO`
+1. In the project-level `build.gradle`:
+
+```
+allprojects {
+   repositories {
+      ...
+      maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+In app-level `build.gradle`: [![](https://jitpack.io/v/sidhuparas/TickingTimer.svg)](https://jitpack.io/#sidhuparas/TickingTimer)
+
+```
+dependencies {
+     implementation 'com.github.sidhuparas:TickingTimer:<latest-version>'
+}
+```
+
+<img src="screenshots/TickingTimer.gif"/>
 
 # How To Use?
 
@@ -81,3 +99,27 @@ timerView.start {
 ```
 
 Remember that the properties defined after `applyConfig()` overrides the config's properties for the specific timer.
+
+# License
+
+MIT License
+
+Copyright (c) 2020 Paras Sidhu
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
