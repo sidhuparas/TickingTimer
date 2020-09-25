@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -70,6 +71,7 @@ class TickingTimer(
         itemView = findViewById(R.id.itemView)
         backgroundImage = findViewById(R.id.backgroundImage)
         lifecycleOwner.lifecycle.addObserver(this)
+        isVisible = false
     }
 
     // Start timer with customization
@@ -121,6 +123,7 @@ class TickingTimer(
     }
 
     // Sets color tint to the background
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun backgroundTint(color: Int?) {
         backgroundImage.imageTintList = if (color == null) null else ColorStateList.valueOf(color)
     }
@@ -186,7 +189,8 @@ class TickingTimer(
         timerAnimation(config.timerAnimation)
         onTimerEndAnimation = config.onTimerEndAnimation
 
-        backgroundTint(config.backgroundTint)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            backgroundTint(config.backgroundTint)
 
         config.customBackground?.let { bg -> customBackground(bg) }
         textSize(50)
