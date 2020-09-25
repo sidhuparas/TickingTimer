@@ -102,7 +102,7 @@ Another way to use the config is to use `applyConfig()` function:
 
 Remember that the properties defined after `applyConfig()` overrides the config's properties for the specific timer.
 
-## Contributions
+# Contributions
 
 - Fork the repo
 - Create a new branch and make changes
